@@ -1,0 +1,52 @@
+import {
+  add,
+  addBy,
+  checkSameLength,
+  divide,
+  multiply,
+  multiplyBy,
+  subtract,
+} from '../../helper/numArray';
+import { sma } from '../trend/sma';
+
+/**
+ * Acceleration bands result object.
+ */
+export interface AccelerationBands {
+  upperBand: number[];
+  middleBand: number[];
+  lowerBand: number[];
+}
+
+/**
+ * Acceleration Bands. Plots upper and lower envelope bands
+ * around a simple moving average.
+ *
+ * Upper Band = SMA(High * (1 + 4 * (High - Low) / (High + Low)))
+ * Middle Band = SMA(Closing)
+ * Lower Band = SMA(Low * (1 - 4 * (High - Low) / (High + Low)))
+ *
+ * @param highs high values.
+ * @param lows low values.
+ * @param closings closing values.
+ * @return acceleration band.
+ */
+export function accelerationBands(
+  highs: number[],
+  lows: number[],
+  closings: number[],
+): AccelerationBands {
+  checkSameLength(highs, lows, closings);
+
+  const k = divide(subtract(highs, lows), add(highs, lows));
+
+  const upperBand = sma(20, multiply(highs, addBy(1, multiplyBy(4, k))));
+  const middleBand = sma(20, closings);
+  const lowerBand = sma(20, multiply(lows, addBy(1, multiplyBy(-4, k))));
+
+  return {
+    upperBand,
+    middleBand,
+    lowerBand,
+  };
+}
