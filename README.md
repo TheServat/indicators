@@ -186,6 +186,4 @@ The information provided on this project is strictly for informational purposes 
 
 ## License
 
-Copyright (c) 2022 Onur TheServat. All Rights Reserved.
-
 The source code is provided under MIT License.
