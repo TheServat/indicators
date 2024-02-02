@@ -8,8 +8,6 @@
 
 Indicator is a TypeScript module providing various stock technical analysis indicators, strategies, and a backtest framework for trading.
 
-_This is a clone of my [Indicator Go](https://github.com/TheServat/indicator) Golang module._
-
 ## Indicators Provided
 
 The following list of indicators are currently supported by this package:
